@@ -27,22 +27,43 @@ function TodoListBoard(props) {
       </div>
     );
 
-  return activeDashboardList.map((item, index) => {
+  return todoList.map((item, index) => {
     return (
-      <li key={index}>
-        <label className="todoList_label">
-          <input
-            className="todoList_input"
-            type="checkbox"
-            checked={item.isDone}
-            onChange={() => todoListChange(index)}
-          />
-          <span> {item.content}</span>
-        </label>
-        <a onClick={() => deleteTodoList(index)}>
-          <i className="fa fa-times"></i>
-        </a>
-      </li>
+      <div key={index}>
+        {activeBoard.isDoneBoard !== null ? (
+          item.isDone === activeBoard.isDoneBoard ? (
+            <li>
+              <label className="todoList_label">
+                <input
+                  className="todoList_input"
+                  type="checkbox"
+                  checked={item.isDone}
+                  onChange={() => todoListChange(index)}
+                />
+                <span> {item.content}</span>
+              </label>
+              <a onClick={() => deleteTodoList(index)}>
+                <i className="fa fa-times"></i>
+              </a>
+            </li>
+          ) : null
+        ) : (
+          <li>
+            <label className="todoList_label">
+              <input
+                className="todoList_input"
+                type="checkbox"
+                checked={item.isDone}
+                onChange={() => todoListChange(index)}
+              />
+              <span> {item.content}</span>
+            </label>
+            <a onClick={() => deleteTodoList(index)}>
+              <i className="fa fa-times"></i>
+            </a>
+          </li>
+        )}
+      </div>
     );
   });
 }
